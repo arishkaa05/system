@@ -94,6 +94,7 @@ export default {
   methods: {
     getSymptoms() {
       console.log('getSymptoms')
+      console.log(this.parametrList);
       this.parametrList.data.forEach(async element => {
         let symptoms = await useSympromsByParametrId(element.id_parametr);
         console.log(symptoms.symptomList._rawValue.data);

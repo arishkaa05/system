@@ -2,7 +2,7 @@
   <div>
     <AddPatient />
     <AddPatientModal />
-    <addPatientParams />
+    <AddPatientParams />
     <AddArea />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-5">
+  <div>
     <div>
       <h1 class="text-4xl font-medium tracking-tight text-gray-900 mb-7">Выберете пациента</h1>
       <div v-if="patientList">
@@ -12,6 +12,7 @@
       </div>
       <FillParametrList v-if="selectedPatientId !== 'Выберете пациента'" :selectedPatientId="selectedPatientId" />
       <SetParametrList v-if="selectedPatientId !== 'Выберете пациента'" :selectedPatientId="selectedPatientId"  />
+      <ResultPatient v-if="selectedPatientId !== 'Выберете пациента'" :selectedPatientId="selectedPatientId"  />
     </div>
   </div>
 </template>
@@ -21,13 +22,15 @@ import usePostPatient from "@/hooks/usePostPatient";
 import { usePatientList } from "@/hooks/usePatientList";
 import FillParametrList from './FillParametrList.vue';
 import SetParametrList from './SetParametrList.vue';
+import ResultPatient from "./ResultPatient.vue";
 
 export default {
 
   name: 'add-patient-params',
   components: {
     FillParametrList,
-    SetParametrList
+    SetParametrList,
+    ResultPatient
   },
   computed: {
    },

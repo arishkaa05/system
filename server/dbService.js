@@ -198,12 +198,31 @@ class DbService {
         people.last_name_people,\
         people.fathert_name_people,\
         parametrs.name_parametr,\
+        parametrs.id_parametr,\
+        people_has_parametrs.exactly_parametr,\
         people_has_parametrs.value_parametr\
         FROM people\
         JOIN people_has_parametrs ON people.id_people = people_has_parametrs.people_id_people\
         JOIN parametrs ON people_has_parametrs.parametrs_id_parametr = parametrs.id_parametr\
         WHERE people.id_people =" + patientId;
 
+        connection.query(query, (err, results) => {
+            if (err) reject(new Error(err.message));
+            resolve(results);
+        })
+      });
+      console.log(response)
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //Получение формул для областей
+  async getArea() {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = "SELECT * FROM area;";
         connection.query(query, (err, results) => {
             if (err) reject(new Error(err.message));
             resolve(results);

@@ -11,7 +11,7 @@ export async function useSympromsByParametrId(parametrId) {
     } catch (e) {
       console.log("Error");
     } finally {
-      console.log(symptomList.value)
+      // console.log(symptomList.value)
     }
 
 

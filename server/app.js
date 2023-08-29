@@ -134,4 +134,13 @@ app.get('/getParametrsByPatient', (request, response) => {
   .then(data => response.json({data : data}))
   .catch(err => console.log(err));
 })
+//получение всех областей
+app.get('/getArea', (request, response) => {
+  const db = dbService.getDbServiceInstance();
+  const result = db.getArea();
+
+  result
+  .then(data => response.json({data : data}))
+  .catch(err => console.log(err));
+})
 app.listen(process.env.PORT, () => console.log('app is running'));
