@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-5">
     <div>
       <h1 class="text-4xl font-medium tracking-tight text-gray-900 mb-7">Выберете пациента</h1>
       <div v-if="patientList">

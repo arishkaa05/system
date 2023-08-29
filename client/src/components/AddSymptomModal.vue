@@ -5,9 +5,9 @@
       <form method="dialog" class="modal-box">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <h2 class="text-2xl mb-3">Добавьте новый симптом</h2>
-        <p>Выберете параметр, к которому относится симптом</p>
+        <p class="text-base	font-medium mb-2">Выберете параметр, к которому относится симптом</p>
         <div style="display: flex;" v-for="parametr in parametrList.data" :key="parametr.id_parametr">
-          <input type="radio" :value="`${parametr.id_parametr}`" :id="parametr.id_parametr" :name="parametr.name_parametr" v-model="selectParametr" />
+          <input class="radio radio-xs radio-primary mt-1 mx-1" type="radio" :value="`${parametr.id_parametr}`" :id="parametr.id_parametr" :name="parametr.name_parametr" v-model="selectParametr" />
           <label :for="parametr.id_parametr">{{ parametr.name_parametr }}</label>
         </div>
         <div><input type="text" placeholder="Введите название симптома" v-model="symptomName" class="input input-bordered w-full my-3 max-w-xs" /></div>

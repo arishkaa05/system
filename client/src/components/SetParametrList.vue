@@ -2,7 +2,7 @@
   <div class="mt-3 mb-20 card bg-base-100 lg:card-side shadow-xl">
     <div class="card-body ">
       <h2 class="text-2xl text-center font-medium mb-4"> Заполненные данные</h2>
-      <button class="btn m-3 w-24" @click="getData()">Выбрать</button>
+      <!-- <button class="btn m-3 w-24" @click="getData()">Выбрать</button> -->
       <h2  v-if="paramsList.data" class="font-bold text-lg">{{ paramsList.data[0].first_name_people }} {{ paramsList.data[0].last_name_people }} {{ paramsList.data[0].fathert_name_people }}</h2>
       <div v-if="paramsList.data">
         <div v-for="parametr in paramsList.data" :key="parametr.uq_people">
@@ -41,8 +41,16 @@ export default {
       ]
     };
   },
+  // watch: {
+  //   parametrList: {
+  //     handler() {
+  //       this.getData();
+  //     },
+  //   },
+  // },
   methods: {
     getData() {
+      console.log('getData')
       useParametrsByPatient(this.selectedPatientId)
       .then((result) => {
         this.paramsList = result.paramsList._rawValue;
@@ -57,6 +65,10 @@ export default {
       usePostParametrByPatient(this.formattedParametrData);
     },
   },
+  mounted() {
+    this.getData();
+    console.log('mounted')
+  }
   // setup() {
   //   const { paramsList} = useParametrsByPatient(this.selectedPatientId);
 

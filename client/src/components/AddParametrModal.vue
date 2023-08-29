@@ -34,7 +34,7 @@
 import usePostParametr from '@/hooks/usePostParametr';
 
 export default {
-  name: 'add-parmetr-modal',
+  name: 'add-parametr-modal',
   props: {
     visible: {
       type: Boolean

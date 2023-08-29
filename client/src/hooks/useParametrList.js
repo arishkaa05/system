@@ -2,7 +2,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 
 export function useParametrList() {
-  const parametrList = ref([]);
+  let parametrList =  ref({});
   const isPostsLoading = ref(true);
   const fetching = async () => {
     try {
