@@ -5,7 +5,6 @@
       <button class="btn btn-primary" @click="getResult()">Получить результат по пациенту</button>
       <div v-if="resultArea.length > 0">
         <h2 class="text-xl">{{ suitableAreas }}</h2>
-        <h2 class="text-xl">{{ maybeSuitableAreas }}</h2>
         <button class="btn btn-primary mt-2" @click="moreInformation = !moreInformation">Показать больше информации?</button>
         <div v-if="moreInformation" class="mt-2">
           <div v-for="area in resultArea" :key="area.id_area">
@@ -15,7 +14,7 @@
                 {{ area.answer }}
               </div>
               <div class="collapse-content"> 
-                <p>Скоро здесь будет объяснение на основе симптомов почему именно не подходит областьи {{ area.name_area }}</p>
+                <p v-for="(item, index) in area.explanation" :key="index">{{ item }}</p>
               </div>
             </div>
           </div>
@@ -50,18 +49,18 @@ export default {
   },
   computed: {
     suitableAreas() {
-      const areas = this.resultArea.filter(item => item.solve === "2");
-      const name_area = areas.reduce((acc, area) => acc += ` ${area.name_area}, `, "").trim();
-      return name_area !== "" ? `Области, которые подходят: ${name_area}` : "";
-    },
-    maybeSuitableAreas() {
-      const areas = this.resultArea.filter(item => item.solve === "6");
-      const name_area = areas.reduce((acc, area) => acc += ` ${area.name_area}, `, "").trim();
-      return name_area !== "" ? `Области, которые могут подходить, основываясь на опыте эксперта: ${name_area}` : "";
+      let areas = this.resultArea.filter(item => item.status === "2");
+      let name_area = areas.reduce((acc, area) => acc += ` ${area.name_area}, `, "").trim();
+      let explainArea = name_area !== "" ? `Области, которые подходят: ${name_area}` : "";
+      areas = this.resultArea.filter(item => item.status === "6");
+      name_area = areas.reduce((acc, area) => acc += ` ${area.name_area}, `, "").trim();
+      explainArea += name_area !== "" ? `Области, которые могут подходить, основываясь на опыте эксперта: ${name_area}` : "";
+      return explainArea !== "" ? explainArea : "Ни одна из областей не подходит";
     },
   },
   methods: {
     async getResult() {
+      this.moreInformation = false;
       const patientId = this.selectedPatientId;
       this.resultArea = await result(patientId);
       console.log(this.resultArea);
