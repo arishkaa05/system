@@ -54,7 +54,7 @@ export default {
       let explainArea = name_area !== "" ? `Области, которые подходят: ${name_area}` : "";
       areas = this.resultArea.filter(item => item.status === "6");
       name_area = areas.reduce((acc, area) => acc += ` ${area.name_area}, `, "").trim();
-      explainArea += name_area !== "" ? `Области, которые могут подходить, основываясь на опыте эксперта: ${name_area}` : "";
+      explainArea += name_area !== "" ? `<br>Области, которые могут подходить, основываясь на опыте эксперта: ${name_area}` : "";
       return explainArea !== "" ? explainArea : "Ни одна из областей не подходит";
     },
   },
@@ -63,7 +63,6 @@ export default {
       this.moreInformation = false;
       const patientId = this.selectedPatientId;
       this.resultArea = await result(patientId);
-      console.log(this.resultArea);
     }
   },
 }

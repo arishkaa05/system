@@ -27,6 +27,7 @@ export const explanationSolveForArea = (solve, name) => {
 }
 
 export const explanationMetaoperation = (term) => {
+  //TODO рефактор
   const status = Number(term.status),
     statusLeft = Number(term.left.status),
     statusRight = Number(term.right.status);

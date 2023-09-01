@@ -28,7 +28,7 @@ const getParametrsByPatient = async (id) => {
 
 const getSymptoms = async (parametrs) => {
   const symptoms = {};
-  parametrs.forEach(async (parametr) => {
+  for (const parametr of parametrs) {
     const response = await useSympromsByParametrId(parametr.id_parametr);
     const data = response.symptomList._rawValue.data;
     data.forEach(symptom => {
@@ -36,9 +36,9 @@ const getSymptoms = async (parametrs) => {
       const { exactly_parametr, value_parametr } = parametr;
       const status = getSymptomStatus(range_end_symptom, range_start_symptom, exactly_parametr, value_parametr);
       symptom['status'] = status;
-      symptoms[`s${symptom.id_symptom}`] = symptom
+      symptoms[`s${symptom.id_symptom}`] = symptom;
     });
-  });
+  };
   return symptoms;
 }
 
@@ -51,9 +51,11 @@ const getSymptomStatus = (end, start, exactly, value) => {
   if (exactlyN === 2) {
     return (valueN >= startN && valueN <= endN) ? "6" : "5"; 
   }
-  if (exactlyN === 1 || exactlyN === 0) {
-    if (valueN === '-') return '0';
+  if (exactlyN === 1) {
     return (valueN >= startN && valueN <= endN) ? "2" : "1"; 
+  }
+  if (exactlyN === 0) {
+    return "0";
   }
 }
 

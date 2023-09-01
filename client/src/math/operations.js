@@ -1,4 +1,5 @@
 export const metaconjunction = (left, right) => {
+  if (left === "0" || right === "0") return "0";
   const conjuction = {
     "11": "1", "12": "1", "14": "1",
     "21": "1", "22": "2", "24": "4",
@@ -8,6 +9,7 @@ export const metaconjunction = (left, right) => {
 }
 
 export const metadisjunction = (left, right) => {
+  if (left === "0" || right === "0") return "0";
   const disjunction = {
     "11": "1", "12": "2", "14": "4",
     "21": "2", "22": "2", "24": "2",
