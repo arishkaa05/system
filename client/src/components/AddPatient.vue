@@ -18,7 +18,7 @@ import usePostPatient from "@/hooks/usePostPatient";
 
 export default {
 
-  name: 'add-area',
+  name: 'add-patient',
   components: {
 
   },

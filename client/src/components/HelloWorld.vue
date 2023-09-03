@@ -3,6 +3,7 @@
     <AddPatient />
     <AddPatientModal />
     <AddPatientParams />
+    <area-list />
     <AddArea />
   </div>
 </template>
@@ -12,6 +13,7 @@ import AddArea from './AddArea.vue';
 import AddPatient from './AddPatient.vue';
 import AddPatientParams from './AddPatientParams.vue';
 import AddPatientModal from './AddPatientModal.vue';
+import AreaList from './AreaList.vue';
 
 export default {
   name: 'HelloWorld',
@@ -23,7 +25,8 @@ export default {
     AddArea,
     AddPatient,
     AddPatientParams,
-    AddPatientModal
+    AddPatientModal,
+    AreaList
   },
   methods: {
   },
