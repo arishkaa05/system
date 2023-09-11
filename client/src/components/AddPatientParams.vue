@@ -8,8 +8,10 @@
           <option v-for="patient in patientList.data" :key="patient.id_people" :value="patient.id_people">
             {{ patient.first_name_people }} {{ patient.last_name_people }} {{ patient.father_name_people }}
           </option>
+          <option value="newPatient">Новый пациент</option>
         </select>
       </div>
+      <AddPatient v-if="selectedPatientId === 'newPatient'"></AddPatient>
       <FillParametrList v-if="selectedPatientId !== 'Выберете пациента'" :selectedPatientId="selectedPatientId" />
       <SetParametrList v-if="selectedPatientId !== 'Выберете пациента'" :selectedPatientId="selectedPatientId"  />
       <ResultPatient v-if="selectedPatientId !== 'Выберете пациента'" :selectedPatientId="selectedPatientId"  />
@@ -23,6 +25,7 @@ import { usePatientList } from "@/hooks/usePatientList";
 import FillParametrList from './FillParametrList.vue';
 import SetParametrList from './SetParametrList.vue';
 import ResultPatient from "./ResultPatient.vue";
+import AddPatient from '@/components/AddPatient.vue';
 
 export default {
 
@@ -30,7 +33,8 @@ export default {
   components: {
     FillParametrList,
     SetParametrList,
-    ResultPatient
+    ResultPatient,
+    AddPatient
   },
   computed: {
    },

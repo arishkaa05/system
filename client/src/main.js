@@ -4,6 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue';
 // import "path/to/daisyui.css";
 import { DaisyUI } from "daisyui";
+import router from './router/router';
 
 const app = createApp(App);
 
@@ -11,4 +12,6 @@ app.use(DaisyUI, {
   theme: 'light'
 });
 
-app.mount("#app");
+app
+  .use(router)
+  .mount("#app");

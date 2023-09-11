@@ -8,9 +8,12 @@
           <option v-for="area in areaList.data" :key="area.id_area" :value="area.formula_area">
             {{ area.name_area }}
           </option>
+          <option value="newArea">Новое направление</option>
         </select>
-        <h2 v-if="selectedArea !== 'Выберете направление'" >{{ transformedFormula }}</h2>
+        <div class="h-11">
+        <h2 v-if="selectedArea !== 'Выберете направление'" >{{ transformedFormula }}</h2></div>
       </div>
+      <AddArea  v-if="selectedArea === 'newArea'"/>
     </div>
   </div>
 </template>
@@ -18,12 +21,13 @@
 <script>
 import { useAreaList } from "@/hooks/useAreaList";
 import { useSymptomList } from '@/hooks/useSymptomList';
+import AddArea from '@/components/AddArea.vue';
 
 
 export default {
 
   name: 'area-list',
-  components: {
+  components: {AddArea
   },
   computed: {
     transformedFormula() {
