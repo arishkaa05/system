@@ -1,28 +1,13 @@
-import axios from "axios";
-import { ref } from "vue";
+import axios from 'axios';
 
-export default async function usePostParametr(newParam) {
-  console.log(newParam);
-  const isPostsLoading = ref(true);
+export const usePostParametr = async (newParam) => {
   try {
-    console.log(newParam)
-    axios.post('http://localhost:8081/insertParametr', {
-      newParam: newParam,
+    const response = await axios.post('http://localhost:8081/insertParametr', {
+      newParam: newParam
     })
-    .then(response => {
-        console.log(response);
-      })
-    .catch(error => {
-      console.log(error);
-    });
-
-
+    return response.data;
   } catch (e) {
-    alert('Error')
-  } finally {
-    isPostsLoading.value = false;
+    console.error('Error:', e); // Вывести ошибку в консоль
+    throw e;
   }
-  return {
-    isPostsLoading
-  };
 }

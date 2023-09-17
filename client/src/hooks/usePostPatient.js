@@ -1,28 +1,13 @@
 import axios from "axios";
-import { ref } from "vue";
 
-export default async function usePostPatient(newPatient) {
-  console.log(newPatient);
-  const isPostsLoading = ref(true);
+export const usePostPatient = async (newPatient) => {
   try {
-    console.log(newPatient)
-    axios.post('http://localhost:8081/insertPatient', {
-      newPatient: newPatient,
+    const response = await axios.post('http://localhost:8081/insertPatient', {
+      newPatient: newPatient
     })
-    .then(response => {
-        console.log(response);
-      })
-    .catch(error => {
-      console.log(error);
-    });
-
-
+    return response.data;
   } catch (e) {
-    alert('Error')
-  } finally {
-    isPostsLoading.value = false;
+    console.error('Error:', e);
+    throw e;
   }
-  return {
-    isPostsLoading
-  };
 }

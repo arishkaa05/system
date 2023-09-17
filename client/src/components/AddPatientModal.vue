@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <button class="btn m-3" onclick="my_modal_4.showModal()">Добавить пациента</button>
     <dialog id="my_modal_4" class="modal modal-top-sm">
@@ -64,4 +64,4 @@ export default {
 
 <style>
 
-</style>
+</style> -->

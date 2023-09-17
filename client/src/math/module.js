@@ -10,6 +10,7 @@ import { explanationSymptom, explanationSolveForArea, explanationMetaoperation }
 
 const result = async (patientId) => {
   const parametrs = await getParametrsByPatient(patientId);
+  console.log(parametrs)
   const symptoms = await getSymptoms(parametrs);
   const areas = await getAreas();
   areas.forEach(area => {
@@ -23,14 +24,15 @@ const result = async (patientId) => {
 
 const getParametrsByPatient = async (id) => {
   const response = await useParametrsByPatient(id);
-  return response.paramsList._rawValue.data;
+  return response;
 }
 
 const getSymptoms = async (parametrs) => {
   const symptoms = {};
   for (const parametr of parametrs) {
     const response = await useSympromsByParametrId(parametr.id_parametr);
-    const data = response.symptomList._rawValue.data;
+    console.log(response)
+    const data = response;
     data.forEach(symptom => {
       const { range_end_symptom, range_start_symptom } = symptom;
       const { exactly_parametr, value_parametr } = parametr;
@@ -49,10 +51,10 @@ const getSymptomStatus = (end, start, exactly, value) => {
     exactlyN = Number(exactly);
   if (exactlyN === 3) return "4";
   if (exactlyN === 2) {
-    return (valueN >= startN && valueN <= endN) ? "6" : "5"; 
+    return (valueN >= startN && valueN <= endN) ? "6" : "5";
   }
   if (exactlyN === 1) {
-    return (valueN >= startN && valueN <= endN) ? "2" : "1"; 
+    return (valueN >= startN && valueN <= endN) ? "2" : "1";
   }
   if (exactlyN === 0) {
     return "0";
@@ -60,6 +62,7 @@ const getSymptomStatus = (end, start, exactly, value) => {
 }
 
 const getAnswerForArea = (symptoms, area) => {
+  console.log(area)
   let lexemes = parse(area.formula_area);
   let term = parseTerm(lexemes);
   solveFormula(symptoms, term);

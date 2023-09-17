@@ -1,25 +1,13 @@
 import axios from "axios";
-import { ref } from "vue";
 
-export default async function usePostSymptom(newSymptom) {
-  console.log(newSymptom);
+export const usePostSymptom = async (newSymptom) => {
   try {
-    console.log(newSymptom)
-    axios.post('http://localhost:8081/insertSymptom', {
-      newSymptom: newSymptom,
+    const response = await axios.post('http://localhost:8081/insertSymptom', {
+      newSymptom: newSymptom
     })
-    .then(response => {
-        console.log(response);
-      })
-    .catch(error => {
-      console.log(error);
-    });
-
-
+    return response.data;
   } catch (e) {
-    alert('Error')
-  } finally {
+    console.error('Error:', e);
+    throw e; 
   }
-  return {
-  };
 }

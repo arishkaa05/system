@@ -19,8 +19,10 @@ app.post('/insertParametr', async (request, response) => {
   try {
     const insertedId = await db.insertNewParametr(newParam);
     console.log(`Данные успешно добавлены с ID: ${insertedId}`);
+    response.send({ success: true, data: insertedId }); // Отправить успешный ответ с ID в теле ответа
   } catch (error) {
     console.log("Ошибка:", error);
+    response.send({ success: false, error: error.message }); // Отправить ответ с ошибкой в теле ответа
   }
 });
 //получение параметров
@@ -33,6 +35,7 @@ app.get('/getParametrList', (request, response) => {
   .then(data => response.json({data : data}))
   .catch(err => console.log(err));
 })
+
 //добавление симптомов
 app.post('/insertSymptom', async (request, response) => {
   const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -47,9 +50,11 @@ app.post('/insertSymptom', async (request, response) => {
       console.log(`Данные успешно добавлены с ID: ${insertedIdSymptom}`);
       const results = await db.setSymptomByParametr(insertedIdSymptom, newSymptom);
       console.log("Данные из таблицы:", results);
+      response.send({ success: true, data: insertedIdSymptom  });
     //  });
   } catch (error) {
     console.log("Ошибка:", error);
+    response.send({ success: false, error: error.message });
   }
 });
 //получение симптомов
@@ -82,8 +87,10 @@ app.post('/insertArea', async (request, response) => {
   try {
     const insertedId = await db.insertNewArea(newArea);
     console.log(`Данные успешно добавлены с ID: ${insertedId}`);
+    response.send({ success: true, data: insertedId });
   } catch (error) {
     console.log("Ошибка:", error);
+    response.send({ success: false, error: error.message });
   }
 });
 //добавление пациента
@@ -95,8 +102,10 @@ app.post('/insertPatient', async (request, response) => {
   try {
     const insertedId = await db.insertNewPatient(newPatient);
     console.log(`Данные успешно добавлены с ID: ${insertedId}`);
+    response.send({ success: true, data: insertedId });
   } catch (error) {
     console.log("Ошибка:", error);
+    response.send({ success: false, error: error.message });
   }
 });
 //получение пациентов
