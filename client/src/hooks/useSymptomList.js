@@ -5,6 +5,6 @@ export const useSymptomList = async () => {
     const { data } = await axios.get("http://localhost:8081/getSymptomList");
         return data.data;
   } catch (e) {
-    console.log("Error");
+    return e
   }
 }

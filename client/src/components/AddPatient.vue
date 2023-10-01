@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1 class="text-4xl font-medium tracking-tight text-gray-900 mb-7">Добавьте пациента</h1>
+      <h1 class="text-4xl font-medium tracking-tight text-gray-900 my-7">Добавьте пациента</h1>
       <input
         type="text"
         placeholder="Иванов Иван Иванович"
@@ -10,7 +10,7 @@
       />
       <p v-if="isSubmit">Уникальный идентификатор: {{ uniqueId }}</p>
       <div v-if="errorMSG">
-        <div class="alert alert-error">
+        <div class="alert alert-error my-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="stroke-current shrink-0 h-6 w-6"
@@ -55,7 +55,6 @@ export default {
     const instance = getCurrentInstance();
     const uniqueId = () => {
       const uuid = uuidv4()
-      console.log(uuid)
       return uuid
     }
 
@@ -72,7 +71,7 @@ export default {
           console.log('Запрос успешно отправлен:', result.data)
           instance.emit('patientAdded', result.data)
         } else {
-          errorMSG.value = 'Ошибка отправки запроса:'
+          errorMSG.value = 'Ошибка отправки запроса'
           setTimeout(() => {
             errorMSG.value = ''
           }, 10000)
@@ -91,6 +90,7 @@ export default {
       name_area,
       formula_area,
       hash_area,
+      errorMSG,
       uniqueId,
       saveChanges
     }

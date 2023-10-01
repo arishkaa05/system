@@ -5,6 +5,6 @@ export const useParametrList = async () => {
     const { data } = await axios.get("http://localhost:8081/getParametrList");
         return data.data;
   } catch (e) {
-    console.log("Error");
+    return e
   }
 }

@@ -18,7 +18,7 @@
                 class="input input-bordered join-item input-sm"
                 type="number"
                 min="0"
-                @input="handleParametrMinInput"
+                @blur="handleParametrMinInput"
                 v-model.number="parametrMin"
                 placeholder="минимум"
               />
@@ -30,7 +30,7 @@
                 class="input input-bordered join-item input-sm"
                 type="number"
                 min="0"
-                @input="handleParametrMaxInput"
+                @blur="handleParametrMaxInput"
                 v-model.number="parametrMax"
                 placeholder="максимум"
               />
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div v-if="errorMSG">
-          <div class="alert alert-error">
+          <div class="alert alert-error mt-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="stroke-current shrink-0 h-6 w-6"
@@ -97,7 +97,9 @@ export default {
           parametrMin: parametrMin.value,
           parametrMax: parametrMax.value
         }
+        console.log(newParam)
         const result = await usePostParametr(newParam)
+        console.log(result)
 
         if (result.success) {
           console.log('Запрос успешно отправлен:', result.data)
@@ -106,7 +108,7 @@ export default {
           const modal = document.getElementById('my_modal_1')
           modal.close()
         } else {
-          ;(errorMSG.value = 'Ошибка отправки запроса:'), result.error
+          (errorMSG.value = 'Ошибка отправки запроса:'), result.error
           setTimeout(() => {
             errorMSG.value = ''
           }, 10000)

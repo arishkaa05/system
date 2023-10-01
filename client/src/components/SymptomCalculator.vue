@@ -49,12 +49,13 @@
                 v-if="item.symptomList && item.symptomList.length === 0"
                 v-show="index === activeIndex"
               >
-                <a
+                <AddSymptomModalByParametr :parametr="item" />
+                <!-- <a
                   class="text-gray-900 hover:text-violet-600 cursor-pointer"
                   onclick="my_modal_2.showModal()"
                 >
                   <span> Добавьте симптом</span>
-                </a>
+                </a> -->
               </div>
             </div>
           </div>
@@ -117,13 +118,15 @@ import { useParametrList } from '@/hooks/useParametrList'
 import { useSympromsByParametrId } from '@/hooks/useSympromsByParametrId'
 import AddParametrModal from './AddParametrModal.vue'
 import AddSymptomModal from './AddSymptomModal.vue'
+import AddSymptomModalByParametr from './AddSymptomModalByParametr.vue'
 import { cnf } from './../logic/cnf'
 
 export default {
   name: 'SymptomCalculator',
   components: {
     AddParametrModal,
-    AddSymptomModal
+    AddSymptomModal,
+    AddSymptomModalByParametr
   },
   props: {
     area: {

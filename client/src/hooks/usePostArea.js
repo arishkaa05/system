@@ -5,10 +5,9 @@ export const usePostArea = async (newArea) => {
     const response = await axios.post('http://localhost:8081/insertArea', {
       newArea: newArea
     })
-    console.log(response)
     return response.data;
   } catch (e) {
-    console.error('Error:', e);
+    return e
     throw e;
   }
 }

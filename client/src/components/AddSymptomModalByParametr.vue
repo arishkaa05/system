@@ -1,16 +1,14 @@
 <template>
   <div>
-    <button class="btn m-3" onclick="my_modal_2.showModal()">Добавить симптом</button>
-    <dialog id="my_modal_2" class="modal">
+    <button class="text-gray-900 hover:text-violet-600 cursor-pointer " onclick="my_modal_4.showModal()">Добавить симптом</button>
+    <dialog id="my_modal_4" class="modal">
       <form method="dialog" class="modal-box">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <h2 class="text-2xl mb-3">Добавьте новый симптом</h2>
         <p class="text-base font-medium mb-2">Выберете параметр, к которому относится симптом</p>
-        <div v-if="parametrList.value">
+        <div>
           <div
             style="display: flex"
-            v-for="parametr in parametrList.value"
-            :key="parametr.id_parametr"
           >
             <input
               class="radio radio-xs radio-primary mt-1 mx-1"
@@ -18,7 +16,8 @@
               :value="`${parametr.id_parametr}`"
               :id="parametr.id_parametr"
               :name="parametr.name_parametr"
-              v-model="selectParametr"
+              checked
+              disabled
             />
             <label :for="parametr.id_parametr">{{ parametr.name_parametr }}</label>
           </div>
@@ -47,7 +46,7 @@
           <div>
             <div>
               <input
-                class="input input-bordered join-item input-sm"
+                class="input input-bordered join-item input-sm "
                 type="number"
                 min="0"
                 @blur="handleParametrMaxInput"
@@ -76,16 +75,7 @@
           </div>
         </div>
         <div class="modal-action">
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="saveChanges"
-            :disabled="
-              !(symptomName.length > 0 && symptomMax && symptomMin && selectParametr !== -1)
-            "
-          >
-            Добавить
-          </button>
+          <button type="button" class="btn btn-primary" @click="saveChanges" :disabled="!(symptomName.length > 0 && symptomMax && symptomMin)">Добавить</button>
           <button class="btn">Close</button>
         </div>
       </form>
@@ -97,49 +87,46 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, onUnmounted, getCurrentInstance } from 'vue'
+import { ref, reactive, getCurrentInstance } from 'vue'
 import { usePostSymptom } from '@/hooks/usePostSymptom'
-import { useParametrList } from '@/hooks/useParametrList'
 
 export default {
-  name: 'add-parmetr-modal',
+  name: 'add-symptom-by-paramer-modal',
   props: {
     visible: {
       type: Boolean
+    }, 
+    parametr: {
+      type: Object,
     }
   },
-  setup() {
+  setup(props) {
     const parametrList = reactive([])
-    const selectParametr = ref(-1)
     const symptomName = ref('')
     const symptomMin = ref()
     const symptomMax = ref()
     let errorMSG = ref('')
     const instance = getCurrentInstance()
 
-    const fetchParamData = async () => {
-      parametrList.value = await useParametrList()
-    }
     const saveChanges = async () => {
       if (
         symptomName.value.length > 0 &&
         symptomMin.value &&
-        symptomMax.value &&
-        selectParametr.value >= 0
+        symptomMax.value
       ) {
         const newSymptom = {
           name_symptom: symptomName.value,
           range_start_symptom: symptomMin.value,
           range_end_symptom: symptomMax.value,
           existance_symptom: true,
-          id_parametr: selectParametr.value
+          id_parametr: props.parametr.id_parametr
         }
         const result = await usePostSymptom(newSymptom)
 
         if (result.success) {
-          instance.emit('symptomAdded', selectParametr.value)
-          const modal = document.getElementById('my_modal_2')
-          modal.close()
+          instance.emit('symptomAdded', props.parametr.id_parametr)
+        const modal = document.getElementById('my_modal_4')
+        modal.close()
         } else {
           (errorMSG.value = 'Ошибка отправки запроса:'), result.error
           setTimeout(() => {
@@ -166,22 +153,15 @@ export default {
         symptomMax.value = symptomMin.value + 1
       }
     }
-    onMounted(() => {
-      fetchParamData()
-    })
-    onUnmounted(() => {})
-
     return {
-      selectParametr,
       symptomName,
       symptomMin,
       handleParametrMinInput,
       handleParametrMaxInput,
       symptomMax,
-      parametrList,
       errorMSG,
+      parametrList,
       saveChanges,
-      fetchParamData
     }
   }
 }

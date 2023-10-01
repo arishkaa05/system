@@ -7,7 +7,7 @@ export const usePostPatient = async (newPatient) => {
     })
     return response.data;
   } catch (e) {
-    console.error('Error:', e);
+    return e
     throw e;
   }
 }

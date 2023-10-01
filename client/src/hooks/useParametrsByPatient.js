@@ -7,6 +7,6 @@ export const useParametrsByPatient = async (patientId) => {
     );
         return data.data;
   } catch (e) {
-    console.log("Error");
+    return e
   }
 }

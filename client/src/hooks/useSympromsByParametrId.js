@@ -5,6 +5,6 @@ export const useSympromsByParametrId = async (parametrId) => {
     const { data } = await axios.get(`http://localhost:8081/getSympromsByParametrId?parametrId=${parametrId}`);
         return data.data;
   } catch (e) {
-    console.log("Error");
+    return e
   }
 }

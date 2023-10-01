@@ -25,11 +25,11 @@
         :selectedPatientId="selectedPatientId"
       />
       <SetParametrList
-        v-if="selectedPatientId !== 'Выберете пациента'"
+        v-if="selectedPatientId !== 'Выберете пациента' && selectedPatientId !== 'newPatient'"
         :selectedPatientId="selectedPatientId"
       />
       <ResultPatient
-        v-if="selectedPatientId !== 'Выберете пациента'"
+        v-if="selectedPatientId !== 'Выберете пациента' && selectedPatientId !== 'newPatient'"
         :selectedPatientId="selectedPatientId"
       />
     </div>

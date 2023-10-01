@@ -1,41 +1,66 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="navbar bg-base-100">
+  <div class="navbar z-[1001] sticky top-0 bg-base-300">
     <div class="container max-w-screen-lg mx-auto">
-      <div class="navbar-start">
-        <div class="dropdown">
-          <label tabindex="0" class="btn btn-ghost btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+      <div class="sm:hidden block">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <label tabindex="0" class="btn btn-ghost btn-circle">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h7"
+                />
+              </svg>
+            </label>
+            <ul
+              tabindex="0"
+              class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
-          </label>
-          <ul
-            tabindex="0"
-            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li><a @click="$router.push('/')">Главная</a></li>
-            <li><a @click="$router.push('/expert')">Эксперту </a></li>
-            <li><a @click="$router.push('/patient')">Пациенты</a></li>
+              <li><a class="cursor-pointer" @click="$router.push('/')">Главная</a></li>
+              <li><a class="cursor-pointer" @click="$router.push('/expert')">Эксперту </a></li>
+              <li><a class="cursor-pointer" @click="$router.push('/patient')">Пациенты</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden sm:block">
+        <div class="navbar-start">
+          <ul class="flex">
+            <li>
+              <a class="mr-5 ml-2 hover:text-violet-600 cursor-pointer" @click="$router.push('/')"
+                >Главная</a
+              >
+            </li>
+            <li>
+              <a class="mr-5 hover:text-violet-600 cursor-pointer" @click="$router.push('/expert')"
+                >Эксперту
+              </a>
+            </li>
+            <li>
+              <router-link
+                to="/patient"
+                class="cursor-pointer active:text-violet-600 hover:text-violet-600"
+                exact
+              >
+                Пациенты
+              </router-link>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="navbar-center">
-        <a class="btn btn-ghost normal-case text-xl"> </a>
-      </div>
       <div class="navbar-end flex">
-        <button class="btn btn-ghost btn-circle">
+        <!--  <button class="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -69,7 +94,7 @@
             </svg>
             <span class="badge badge-xs badge-primary indicator-item"></span>
           </div>
-        </button>
+        </button>-->
       </div>
     </div>
   </div>
@@ -81,3 +106,10 @@ export default {
   name: 'Navbar'
 }
 </script>
+
+<style scoped>
+.router-link-exact-active{
+  color: #7c3aed; /* Цвет текста для активной ссылки */
+  /* Другие стили, которые вы хотите применить к активной ссылке */
+}
+</style>

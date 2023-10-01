@@ -7,7 +7,7 @@ export const usePostSymptom = async (newSymptom) => {
     })
     return response.data;
   } catch (e) {
-    console.error('Error:', e);
+    return e
     throw e; 
   }
 }

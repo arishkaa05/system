@@ -5,6 +5,6 @@ export const usePatientList = async () => {
     const { data } = await axios.get("http://localhost:8081/getPatientList");
         return data.data;
   } catch (e) {
-    console.log("Error");
+    return e
   }
 }

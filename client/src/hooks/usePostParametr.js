@@ -7,7 +7,7 @@ export const usePostParametr = async (newParam) => {
     })
     return response.data;
   } catch (e) {
-    console.error('Error:', e); // Вывести ошибку в консоль
+    return e;
     throw e;
   }
 }

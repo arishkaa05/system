@@ -171,12 +171,30 @@ class DbService {
       console.log(error);
     }
   }
+  // //добавление параметра по пациенту
+  // insertNewParametrByPatient = (newParamList) => {
+  //   return new Promise((resolve, reject) => {
+  //     console.log(newParamList)
+  //     const sqlQuery = "INSERT INTO people_has_parametrs(people_id_people,parametrs_id_parametr, value_parametr, exactly_parametr) VALUES(?, ?, ?, ?)";
+  //     const values = [newParamList.people_id_people.toString(), newParamList.parametrs_id_parametr.toString(), newParamList.value_parametr, newParamList.exactly_parametr];
+
+  //     connection.query(sqlQuery, values, function (error, results, fields) {
+  //       if (error) {
+  //         reject(error);
+  //       } else {
+  //         const insertedId = results.insertId;
+  //         resolve(insertedId);
+  //       }
+  //     });
+  //   });
+  // }
   //добавление параметра по пациенту
   insertNewParametrByPatient = (newParamList) => {
     return new Promise((resolve, reject) => {
       console.log(newParamList)
-      const sqlQuery = "INSERT INTO people_has_parametrs(people_id_people,parametrs_id_parametr, value_parametr, exactly_parametr) VALUES(?, ?, ?, ?)";
-      const values = [newParamList.people_id_people.toString(), newParamList.parametrs_id_parametr.toString(), newParamList.value_parametr, newParamList.exactly_parametr];
+      const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // Преобразовать в нужный формат
+      const sqlQuery = "INSERT INTO people_has_parametrs(people_id_people,parametrs_id_parametr, value_parametr, exactly_parametr, date_parametr) VALUES(?, ?, ?, ?, ?)";
+      const values = [newParamList.people_id_people.toString(), newParamList.parametrs_id_parametr.toString(), newParamList.value_parametr, newParamList.exactly_parametr, currentDate];
 
       connection.query(sqlQuery, values, function (error, results, fields) {
         if (error) {
@@ -188,6 +206,7 @@ class DbService {
       });
     });
   }
+
   //Получение всех параметров по ID пациента
   async getParametrsByPatient(patientId) {
     // console.log('idpatient: ',  idpatient)
@@ -200,6 +219,7 @@ class DbService {
         parametrs.name_parametr,\
         parametrs.id_parametr,\
         people_has_parametrs.exactly_parametr,\
+        people_has_parametrs.date_parametr,\
         people_has_parametrs.value_parametr\
         FROM people\
         JOIN people_has_parametrs ON people.id_people = people_has_parametrs.people_id_people\
