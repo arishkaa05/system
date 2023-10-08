@@ -1,6 +1,6 @@
 <template>
   <div class="my-3 card bg-base-100 lg:card-side shadow-xl">
-    <div class="card-body">
+    <div class="card-body ">
       <h2 class="text-2xl text-center font-medium mb-4">Введите данные</h2>
       <div v-if="parametrList.value">
         <div

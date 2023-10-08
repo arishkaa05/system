@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-3 mb-20 card bg-base-100 lg:card-side shadow-xl" v-if="paramsList.value && paramsList.value.length > 0">
+  <div class="mt-3 mb-20 card  bg-base-100 lg:card-side shadow-xl" v-if="paramsList.value && paramsList.value.length > 0">
     <div class="card-body">
       <h2 class="text-2xl text-center font-medium mb-4">Заполненные данные</h2>
       <h2 v-if="paramsList.value" class="font-bold text-lg">

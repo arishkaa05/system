@@ -1,15 +1,15 @@
 <template>
   <div>
-    <button class="text-gray-900 hover:text-violet-600 cursor-pointer " onclick="my_modal_4.showModal()">Добавить симптом</button>
-    <dialog id="my_modal_4" class="modal">
+    <button class="text-gray-900 hover:text-violet-600 cursor-pointer" @click="isOpen = !isOpen">
+      Добавить симптом
+    </button>
+    <dialog id="my_modal_4" class="modal" :open="isOpen"> 
       <form method="dialog" class="modal-box">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"  @click="isOpen = !isOpen">✕</button>
         <h2 class="text-2xl mb-3">Добавьте новый симптом</h2>
         <p class="text-base font-medium mb-2">Выберете параметр, к которому относится симптом</p>
         <div>
-          <div
-            style="display: flex"
-          >
+          <div style="display: flex">
             <input
               class="radio radio-xs radio-primary mt-1 mx-1"
               type="radio"
@@ -46,7 +46,7 @@
           <div>
             <div>
               <input
-                class="input input-bordered join-item input-sm "
+                class="input input-bordered join-item input-sm"
                 type="number"
                 min="0"
                 @blur="handleParametrMaxInput"
@@ -75,19 +75,26 @@
           </div>
         </div>
         <div class="modal-action">
-          <button type="button" class="btn btn-primary" @click="saveChanges" :disabled="!(symptomName.length > 0 && symptomMax && symptomMin)">Добавить</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="saveChanges"
+            :disabled="!(symptomName.length > 0 && symptomMax && symptomMin)"
+          >
+            Добавить
+          </button>
           <button class="btn">Close</button>
         </div>
       </form>
       <form method="dialog" class="modal-backdrop">
-        <button>close</button>
+        <button  @click="isOpen = !isOpen">close</button>
       </form>
     </dialog>
   </div>
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance } from 'vue'
+import { ref, reactive, onMounted, getCurrentInstance } from 'vue'
 import { usePostSymptom } from '@/hooks/usePostSymptom'
 
 export default {
@@ -95,25 +102,22 @@ export default {
   props: {
     visible: {
       type: Boolean
-    }, 
+    },
     parametr: {
-      type: Object,
+      type: Object
     }
   },
   setup(props) {
     const parametrList = reactive([])
     const symptomName = ref('')
     const symptomMin = ref()
+    let isOpen = ref(false)
     const symptomMax = ref()
     let errorMSG = ref('')
     const instance = getCurrentInstance()
 
     const saveChanges = async () => {
-      if (
-        symptomName.value.length > 0 &&
-        symptomMin.value &&
-        symptomMax.value
-      ) {
+      if (symptomName.value.length > 0 && symptomMin.value && symptomMax.value) {
         const newSymptom = {
           name_symptom: symptomName.value,
           range_start_symptom: symptomMin.value,
@@ -125,10 +129,10 @@ export default {
 
         if (result.success) {
           instance.emit('symptomAdded', props.parametr.id_parametr)
-        const modal = document.getElementById('my_modal_4')
-        modal.close()
+          const modal = document.getElementById('my_modal_4')
+          modal.close()
         } else {
-          (errorMSG.value = 'Ошибка отправки запроса:'), result.error
+          ;(errorMSG.value = 'Ошибка отправки запроса:'), result.error
           setTimeout(() => {
             errorMSG.value = ''
           }, 10000)
@@ -153,6 +157,8 @@ export default {
         symptomMax.value = symptomMin.value + 1
       }
     }
+    onMounted(() => {
+    })
     return {
       symptomName,
       symptomMin,
@@ -162,6 +168,7 @@ export default {
       errorMSG,
       parametrList,
       saveChanges,
+      isOpen
     }
   }
 }

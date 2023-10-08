@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="navbar z-[1001] sticky top-0 bg-base-300">
+  <div class="navbar z-[1001] sticky top-0 shadow-xl bg-base-100">
     <div class="container max-w-screen-lg mx-auto">
       <div class="sm:hidden block">
         <div class="navbar-start">
@@ -22,80 +22,46 @@
                 />
               </svg>
             </label>
-            <ul
-              tabindex="0"
+            <div
               class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li><a class="cursor-pointer" @click="$router.push('/')">Главная</a></li>
-              <li><a class="cursor-pointer" @click="$router.push('/expert')">Эксперту </a></li>
-              <li><a class="cursor-pointer" @click="$router.push('/patient')">Пациенты</a></li>
-            </ul>
+              <a
+                class="block cursor-pointer px-3 py-2 rounded-2lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                @click="$router.push('/')">Главная</a>
+              <a
+                class="block cursor-pointer px-3 py-2 rounded-2lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                @click="$router.push('/expert')">Эксперту </a>
+              <a
+                class="block cursor-pointer px-3 py-2 rounded-2lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                @click="$router.push('/patient')">Пациенты</a>
+        
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="hidden sm:block">
-        <div class="navbar-start">
-          <ul class="flex">
-            <li>
-              <a class="mr-5 ml-2 hover:text-violet-600 cursor-pointer" @click="$router.push('/')"
-                >Главная</a
-              >
-            </li>
-            <li>
-              <a class="mr-5 hover:text-violet-600 cursor-pointer" @click="$router.push('/expert')"
-                >Эксперту
-              </a>
-            </li>
-            <li>
-              <router-link
-                to="/patient"
-                class="cursor-pointer active:text-violet-600 hover:text-violet-600"
-                exact
-              >
-                Пациенты
-              </router-link>
-            </li>
-          </ul>
+    <div class="hidden sm:block">
+      <div class="navbar-start">
+        <div class="hidden sm:ml-6 xl:ml-8 sm:flex sm:space-x-8">
+          <a
+            class="border-transparent cursor-pointer text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+            @click.stop="$router.push('/')"
+            >Главная</a
+          >
+          <a
+            class="border-transparent cursor-pointer text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+            @click="$router.push('/expert')"
+            >Эксперту</a
+          >
+          <a
+            class="border-transparent cursor-pointer text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+            @click="$router.push('/patient')"
+            >Пациенты</a
+          >
         </div>
       </div>
-      <div class="navbar-end flex">
-        <!--  <button class="btn btn-ghost btn-circle">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </button>
-        <button class="btn btn-ghost btn-circle">
-          <div class="indicator">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
-            <span class="badge badge-xs badge-primary indicator-item"></span>
-          </div>
-        </button>-->
-      </div>
+      <div class="navbar-end flex"></div>
+    </div>
     </div>
   </div>
 </template>
@@ -108,7 +74,7 @@ export default {
 </script>
 
 <style scoped>
-.router-link-exact-active{
+.router-link-exact-active {
   color: #7c3aed; /* Цвет текста для активной ссылки */
   /* Другие стили, которые вы хотите применить к активной ссылке */
 }

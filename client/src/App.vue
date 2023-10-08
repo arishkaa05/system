@@ -11,8 +11,8 @@ export default {
   <div class="app">
     <Navbar></Navbar>
     <div class="">
-      <div class="min-h-screen flex flex-col">
-        <div class="container max-w-screen-lg flex-grow mx-auto bg-base-200 py-20 px-5">
+      <div class="min-h-screen bg-neutral-100 flex flex-col">
+        <div class="container max-w-screen-lg flex-grow mx-auto py-20 px-5">
           <router-view ></router-view>
         </div>
       </div>

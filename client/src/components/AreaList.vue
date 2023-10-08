@@ -1,19 +1,26 @@
 <template>
   <div>
     <div>
-      <h1 class="text-4xl font-medium tracking-tight text-gray-900 mb-7">Выберете направление</h1>
-      <div v-if="areaList">
-        <select class="select select-bordered w-full max-w-xs" v-model="selectedArea">
-          <option disabled selected>Выберете направление</option>
-          <option v-for="area in areaList.value" :key="area.id_area" :value="area">
-            {{ area.name_area }}
-          </option>
-          <option value="newArea">Новое направление</option>
-        </select>
-        <div class="h-11 my-3">
-          <h2 v-if="selectedArea !== 'Выберете направление' && selectedArea !== 'newArea'">
-            Для направления "{{ selectedArea.name_area }}" характерны: <span class=" text-lg">{{ transformedFormula }}</span>
-          </h2>
+      <div class="card  bg-base-100 lg:card-side shadow-xl" v-if="selectedArea !== 'newArea'">
+        <div class="card-body">
+          <h1 class="text-4xl font-medium tracking-tight text-gray-900 mb-7">
+            Выберете направление
+          </h1>
+          <div v-if="areaList">
+            <select class="select select-bordered w-full max-w-xs" v-model="selectedArea">
+              <option disabled selected>Выберете направление</option>
+              <option v-for="area in areaList.value" :key="area.id_area" :value="area">
+                {{ area.name_area }}
+              </option>
+              <option value="newArea">Новое направление</option>
+            </select>
+            <div class="h-11 my-3">
+              <h2 v-if="selectedArea !== 'Выберете направление' && selectedArea !== 'newArea'">
+                Для направления "{{ selectedArea.name_area }}" характерны:
+                <span class="text-lg">{{ transformedFormula }}</span>
+              </h2>
+            </div>
+          </div>
         </div>
       </div>
       <AddArea v-if="selectedArea === 'newArea'" />

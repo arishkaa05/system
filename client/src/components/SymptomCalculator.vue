@@ -41,8 +41,8 @@
                   :key="symptom.id_symptom"
                   @click="updateFormula(symptom)"
                 >
-                  <span>{{ symptom.name_symptom }}</span> </a
-                ><br />
+                  <ul><li>{{ symptom.name_symptom }}</li></ul> </a
+                >
               </div>
               <div
                 class="collapse-content"
@@ -52,7 +52,7 @@
                 <AddSymptomModalByParametr :parametr="item" />
                 <!-- <a
                   class="text-gray-900 hover:text-violet-600 cursor-pointer"
-                  onclick="my_modal_2.showModal()"
+                  onclick="my_modal_.showModal()"
                 >
                   <span> Добавьте симптом</span>
                 </a> -->

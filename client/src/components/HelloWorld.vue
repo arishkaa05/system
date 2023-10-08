@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <AddPatient />
     <AddPatientModal />
@@ -32,4 +32,4 @@ export default {
   },
   props: {}
 }
-</script>
+</script> -->
