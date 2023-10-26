@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-const { PatientParametr, Patient, Parametr } = require("../models");
+import PatientParametr from "../models/patientParametrModel";
+import Parametr from "../models/parametrModel";
+import Patient from "../models/patientModel";
 const ApiError = require("../error");
 
 interface PatientParametrDto {

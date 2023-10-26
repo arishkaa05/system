@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-const { User, Role } = require("../models");
+import Role from "../models/roleModel";
 const ApiError = require("../error");
 
 class RoleController {

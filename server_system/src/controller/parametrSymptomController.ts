@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-const { ParametrSymptom, Symptom, Parametr } = require("../models");
+import ParametrSymptom from "../models/parametrSymptomModel";
+import Symptom from "../models/sympromModel";
+import Parametr from "../models/parametrModel";
 const ApiError = require("../error");
 
 interface ParametrSymptomDto {

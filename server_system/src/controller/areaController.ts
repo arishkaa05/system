@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-const { Area } = require("../models");
+import Area from "../models/areaModel";
 const ApiError = require("../error");
 
 interface AreaDto {

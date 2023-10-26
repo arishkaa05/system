@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-const { User } = require("../models");
 const ApiError = require("../error");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 import { serialize } from "cookie";
+import User from "../models/userModel";
 
 interface LoginDto {
   username: string;

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-const { Patient } = require("../models");
+import Patient from "../models/patientModel";
 const ApiError = require("../error");
 
 interface PatientDto {
