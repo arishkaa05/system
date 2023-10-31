@@ -20,7 +20,7 @@ function loggerMiddleware(request: express.Request, response: express.Response, 
 const app = express();
 app.use(cookieParser());
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://769b-83-68-50-244.eu.ngrok.io', 'https://292b-83-68-51-186.eu.ngrok.io'],
+    origin: ['http://localhost:5173', 'https://769b-83-68-50-244.eu.ngrok.io', 'https://292b-83-68-51-186.eu.ngrok.io'],
     credentials: true
 }))
 app.use(fileUpload({

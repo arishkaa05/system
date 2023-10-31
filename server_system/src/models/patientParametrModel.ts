@@ -10,11 +10,14 @@ const PatientParametr = sequelize.define("patient_parametr", {
   value_parametr: { type: DataTypes.FLOAT, allowNull: false },
   exactly_parametr: { type: DataTypes.INTEGER, allowNull: false }
 
+}, { 
+  constraints: false,
+  unique: false,
 });
 
 
 // Отношение параметра и пациента
-Patient.belongsToMany(Parametr, { through: PatientParametr });
-Parametr.belongsToMany(Patient, { through: PatientParametr });
+Patient.belongsToMany(Parametr, { through: { model: PatientParametr, unique: false }});
+Parametr.belongsToMany(Patient, { through: { model: PatientParametr, unique: false }});
 
 export default PatientParametr;

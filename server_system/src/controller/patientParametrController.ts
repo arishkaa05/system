@@ -33,16 +33,18 @@ class PatientParametrController {
     try {
       const patientId = req.params.id;
       console.log(patientId);
-      const parametrs = await Parametr.findAll({
-        include: {
-          model: Patient,
-          where: {
-            id: patientId,
-          },
-          through: {
-            attributes: [],
-          },
-        },
+      const parametrs = await Patient.findByPk(req.params.id, {
+        attributes: ['uq_patient', 'name', 'lastname', 'fathername'],
+        include: [
+          {
+            model: Parametr,
+            attributes: ['id', 'name_parametr'],
+            through: {
+              model: PatientParametr,
+              attributes: ['value_parametr', 'exactly_parametr', 'createdAt']
+            }
+          }
+        ]
       });
 
       return res.status(200).json({
