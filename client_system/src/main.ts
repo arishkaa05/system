@@ -2,7 +2,7 @@ import 'daisyui/dist/full.css'
 import "tailwindcss/tailwind.css";
 import { createApp } from 'vue'
 import App from './App.vue';
-// import "path/to/daisyui.css";
+import { createPinia } from 'pinia';
 import DaisyUI from "daisyui";
 import router from './router/router';
 
@@ -14,4 +14,5 @@ app.use(DaisyUI, {
 
 app
   .use(router)
+  .use(createPinia())
   .mount("#app");
