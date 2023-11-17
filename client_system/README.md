@@ -1,18 +1,81 @@
-# Vue 3 + TypeScript + Vite
+# Система мультиопераций
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## Recommended IDE Setup
+## Архитектура REST API, HTTPS, Spring Boot MVC
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Архитектура REST API приложения состоит из следующих компонентов:
 
-## Type Support For `.vue` Imports in TS
+- Клиентский слой:
+    - Реализован на Vue 3.
+    - Отвечает за визуальное представление данных и взаимодействие с пользователем.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- Серверный слой:
+    - Реализован на Node.js.
+    - Отвечает за обработку запросов от клиента и взаимодействие с базой данных.
+    - Использует MVC архитектурный шаблон для разделения бизнес-логики, модели и представления.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+- База данных:
+    - Используется PostgreSQL для хранения информации.
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Архитектурный шаблон MVC
+
+![Архитектурный шаблон](docs/mvc_spring.png)
+
+Модель (Model), представление (View) и контроллер (Controller).
+
+Модель (Model) представляет собой компонент, который отвечает за обработку данных и бизнес-логику приложения. Он
+содержит информацию и методы для работы с этой информацией. Модель не зависит от представления и контроллера, что
+позволяет ей быть независимой и переиспользуемой.
+
+Представление (View) отвечает за отображение данных модели пользователю. Оно представляет собой пользовательский
+интерфейс, через который пользователь может взаимодействовать с приложением. Представление получает данные от модели и
+отображает их пользователю. Оно не содержит бизнес-логики и не изменяет данные модели.
+
+Контроллер (Controller) является посредником между моделью и представлением. Он получает запросы от пользователя через
+представление, обрабатывает эти запросы, взаимодействует с моделью для получения или изменения данных и обновляет
+представление с новыми данными. Контроллер также может выполнять дополнительные действия, такие как валидация данных или
+управление навигацией.
+
+## Запуск проекта 
+
+Для запуска проекта cклонируйте репозиторий проекта на свой локальный компьютер:
+   ```
+   git clone https://github.com/arishkaa05/system.git
+   ```
+
+
+### Бекенд
+
+1. Перейдите в директорию server_system:
+   ```
+   cd server_system 
+   ```
+2. Создайте и запустите кондейнеры для сервиса "node_db":
+   ```
+   docker compose up -d node_db
+   ```
+3. Соберите Docker контейнер:
+    ```
+    docker compose up
+    ```
+
+
+### frontend
+
+1. Перейдите в директорию client_system:
+   ```
+   cd client_system
+   ```
+
+2. Соберите Docker образ с помощтю команды
+   ```
+   docker build -t frontend .
+   ```
+
+3. Запустите одно изображение с помощью команды:
+   ```
+   docker run --rm --name frontend_v1 -p 5173:5173 -d frontend
+   ```
+
+Пожалуйста, обратите внимание, что в данном примере предполагается, что у вас уже установлен Docker. Также необходимо
+убедиться, что порты 8081 и 5173 свободены для использования.
