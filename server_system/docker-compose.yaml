@@ -1,0 +1,80 @@
+# version: '3'
+# volumes:
+#   db-data:
+#     driver: local
+# services:
+#   app:
+#     build:
+#       context: .
+#     container_name: backend
+#     depends_on:
+#       - db
+#     env_file:
+#       - .env
+#     ports:
+#       - '8081:8081'
+#   db:
+#     image: postgres:15.1-alpine
+#     container_name: postgres
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=postgres 
+#       - POSTGRES_DB=system
+#     volumes:
+      # - db-data:/var/lib/postgresql/data
+
+# version: '3'
+# services:
+#   backend:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - 8081:8081
+#     environment:
+#       - DB_HOST=db
+#       - DB_PORT=5432
+#       - DB_USER=postgres
+#       - DB_PASSWORD=postgres
+#       - DB_NAME=system
+#     depends_on:
+#       - db
+#   db:
+#     image: postgres:16
+#     ports:
+#       - 3001:5432
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=postgres
+#       - POSTGRES_DB=system
+version: "3.9"
+
+services:
+  node_app:
+    container_name: node_app
+    build: .
+    image: system
+    ports:
+      - "8081:8081"
+    environment:
+      - PG_DB=system
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=node_db
+    depends_on:
+      - node_db
+  
+  node_db:
+    container_name: node_db
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=system
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - node_db_data:/var/lib/postgresql/data
+
+volumes:
+  node_db_data: {}

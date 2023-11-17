@@ -83,6 +83,13 @@
             <AddParametrModal @parametrAdded="handleParametrAdded" />
             <AddSymptomModal @symptomAdded="handleSymptomAdded" />
           </div>
+
+        <button
+          class="btn mt-32 ml-12 btn-primary"
+          @click="sendData()"
+        >
+          Сохранить
+        </button>
         </div>
       </div>
     </div>
@@ -107,6 +114,7 @@ const props = defineProps({
   },
 });
 const area = ref(props.area);
+console.log(props.area)
 const formula = ref<string[]>([]);
 const isParametrList = ref<Boolean>(false);
 const formulaDB = ref([]);
@@ -206,7 +214,7 @@ const sendData = async () => {
   ) {
     const formulaCNF = cnf(formulaDB.value.join(""));
     const newArea: Area = {
-      name_area: area.value,
+      name_area: props.area,
       formula_area: formulaDB.value.join(""),
       hash_area: formulaCNF,
     };
@@ -220,7 +228,6 @@ const sendData = async () => {
         autoClose: 3000,
       }); 
     }
-    area.value = "";
     formula.value = [];
     formulaDB.value = [];
   } else {
