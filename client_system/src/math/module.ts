@@ -1,6 +1,6 @@
-import { getPatientParametr } from "../hooks/usePatientParametr";
-import { getParametrSymprom } from "../hooks/useParametrSymptom";
-import { getArea } from "../hooks/useArea";
+import { getPatientParametr } from "../services/usePatientParametr";
+import { getParametrSymprom } from "../services/useParametrSymptom";
+import { getArea } from "../services/useArea";
 
 import lexer from '../logic/lexer';
 import parseTerm from '../logic/parser';

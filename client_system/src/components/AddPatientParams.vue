@@ -79,7 +79,7 @@
 
 <script setup lang='ts'>
 import { ref, onMounted, reactive } from "vue";
-import { getPatient, Patients } from "../hooks/usePatient";
+import { getPatient, Patients } from "../services/usePatient";
 import ResultPatient from "./ResultPatient.vue";
 import FillParametrList from "./FillParametrList.vue";
 import SetParametrList from "./SetParametrList.vue";
@@ -107,3 +107,13 @@ onMounted(() => {
   fetchPatientData();
 });
 </script>
+
+
+<style>
+  input[type="number"]::-webkit-inner-spin-button, 
+  input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+</style>

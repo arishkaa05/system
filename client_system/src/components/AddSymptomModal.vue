@@ -91,9 +91,9 @@
 
 <script setup lang='ts'>
 import { ref, reactive, onMounted, onUnmounted, getCurrentInstance } from "vue";
-import { createSymptom } from "../hooks/useSymptom";
-import { getParametr, Parameters } from "../hooks/useParametr";
-import { createParametrSymprom } from "../hooks/useParametrSymptom";
+import { createSymptom } from "../services/useSymptom";
+import { getParametr, Parameters } from "../services/useParametr";
+import { createParametrSymprom } from "../services/useParametrSymptom";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
@@ -125,11 +125,13 @@ const saveChanges = async () => {
     };
     const result = await createSymptom(newSymptom);
     if (result.status === 200) {
+      console.log(result)
       const resultParam = await createParametrSymprom({
         symptomId: result.data.symptomId,
         parametrId: selectParametr.value,
       });
       if (resultParam.status === 200) {
+        console.log('emit')
         instance.emit("symptomAdded", selectParametr.value);
       } else
 
@@ -153,16 +155,26 @@ const saveChanges = async () => {
   symptomMax.value = null;
 };
 const handleParametrMinInput = () => {
+  let param = parametrList.value.parametrs.find(param => param.id == selectParametr.value);
+  
   if (symptomMin.value < 0) symptomMin.value = null;
   if (symptomMin.value >= symptomMax.value) {
     symptomMin.value = symptomMax.value - 1;
   }
+  if (symptomMin.value < param.min_value_parametr) {
+    symptomMin.value = param.min_value_parametr
+  }
 };
 
 const handleParametrMaxInput = () => {
+  let param = parametrList.value.parametrs.find(param => param.id == selectParametr.value);
+
   if (symptomMax.value < 0) symptomMax.value = null;
   if (symptomMax.value <= symptomMin.value) {
     symptomMax.value = symptomMin.value + 1;
+  }
+  if (symptomMax.value > param.max_value_parametr) {
+    symptomMax.value = param.max_value_parametr
   }
 };
 
@@ -179,4 +191,11 @@ onMounted(() => {
 });
 </script>
 
-<style></style>
+<style>
+  input[type="number"]::-webkit-inner-spin-button, 
+  input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+</style>

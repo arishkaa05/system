@@ -110,7 +110,7 @@
 
 <script setup lang='ts'>
 import { ref } from "vue";
-import { createUser, User } from "../hooks/useUser";
+import { createUser, User } from "../services/useUser";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 

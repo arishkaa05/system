@@ -64,8 +64,8 @@
 
 <script setup lang='ts'>
 import { computed, reactive, onMounted, ref } from "vue";
-import { getParametr, Parameters } from "../hooks/useParametr";
-import { createPatientParametr } from "../hooks/usePatientParametr";
+import { getParametr, Parameters } from "../services/useParametr";
+import { createPatientParametr } from "../services/usePatientParametr";
 
 const props = defineProps({
   selectedPatientId: {

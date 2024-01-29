@@ -105,8 +105,8 @@
 
 <script setup lang='ts'>
 import { ref, reactive, onMounted, getCurrentInstance } from "vue";
-import { createParametrSymprom } from "../hooks/useParametrSymptom";
-import { createSymptom, Symptom } from "../hooks/useSymptom";
+import { createParametrSymprom } from "../services/useParametrSymptom";
+import { createSymptom, Symptom } from "../services/useSymptom";
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -169,6 +169,9 @@ const handleParametrMinInput = () => {
   if (symptomMin.value >= symptomMax.value) {
     symptomMin.value = symptomMax.value - 1;
   }
+  if (symptomMin.value < props.parametr.min_value_parametr) {
+    symptomMin.value = props.parametr.parametram.min_value_parametr
+  }
 };
 
 const handleParametrMaxInput = () => {
@@ -176,7 +179,18 @@ const handleParametrMaxInput = () => {
   if (symptomMax.value <= symptomMin.value) {
     symptomMax.value = symptomMin.value + 1;
   }
+  if (symptomMax.value > props.parametr.max_value_parametr) {
+    symptomMax.value = props.parametr.max_value_parametr
+  }
 };
 </script>
 
-<style></style>
+<style>
+  input[type="number"]::-webkit-inner-spin-button, 
+  input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+</style>
+

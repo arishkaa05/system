@@ -53,7 +53,7 @@
 <script setup>
 import Popper from "vue3-popper";
 import { useUserStore } from "../stores/userStore";
-import { logoutUser } from "../hooks/useUser";
+import { logoutUser } from "../services/useUser";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { useRouter } from "vue-router";

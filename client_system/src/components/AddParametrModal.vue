@@ -62,7 +62,7 @@
 
 <script setup lang='ts'>
 import { ref, getCurrentInstance } from "vue";
-import { createParametr, Parameter } from "../hooks/useParametr";
+import { createParametr, Parameter } from "../services/useParametr";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 

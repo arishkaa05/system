@@ -98,9 +98,9 @@
 
 <script setup lang='ts' >
 import { computed, ref, reactive, onMounted, watch } from "vue";
-import { Area, createArea } from "../hooks/useArea";
-import { getParametr, Parameters } from "../hooks/useParametr";
-import { getParametrSymprom } from "../hooks/useParametrSymptom";
+import { Area, createArea } from "../services/useArea";
+import { getParametr, Parameters } from "../services/useParametr";
+import { getParametrSymprom } from "../services/useParametrSymptom";
 import AddParametrModal from "./AddParametrModal.vue";
 import AddSymptomModal from "./AddSymptomModal.vue";
 import AddSymptomModalByParametr from "./AddSymptomModalByParametr.vue";
@@ -114,7 +114,6 @@ const props = defineProps({
   },
 });
 const area = ref(props.area);
-console.log(props.area)
 const formula = ref<string[]>([]);
 const isParametrList = ref<Boolean>(false);
 const formulaDB = ref([]);
@@ -201,9 +200,12 @@ const handleSymptomAdded = async (symptomId: number) => {
   const index = parametrList.value.parametrs.findIndex(
     (item) => item.id === symptomId
   );
-  parametrList.value.parametrs[index].symptomList = symptoms.symptoms;
-  parametrList.value.parametrs[index].active = false;
-  isParametrList.value = true;
+  if (index !== -1){
+    parametrList.value.parametrs[index].symptomList = symptoms.symptoms;
+    parametrList.value.parametrs[index].active = false;
+    isParametrList.value = true;
+  }
+  else getSymptoms(); 
 };
 
 const sendData = async () => {

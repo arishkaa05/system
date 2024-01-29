@@ -183,7 +183,7 @@
 
 <script setup lang='ts'>
 import { ref } from "vue";
-import { loginUser, createUser } from "../hooks/useUser";
+import { loginUser, createUser } from "../services/useUser";
 import { toast } from "vue3-toastify";
 import { useUserStore } from "../stores/userStore";
 import "vue3-toastify/dist/index.css";

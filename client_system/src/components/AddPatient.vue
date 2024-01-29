@@ -43,7 +43,7 @@
 <script setup lang='ts'>
   import { ref, getCurrentInstance } from 'vue'
   import { v4 as uuidv4 } from 'uuid'
-  import { createPatient, Patient } from '../hooks/usePatient';
+  import { createPatient, Patient } from '../services/usePatient';
 
   const isSubmit = ref<Boolean>(false)
   const name = ref<String>('')

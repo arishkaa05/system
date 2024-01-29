@@ -14,30 +14,26 @@
               class="select select-bordered w-full max-w-xs"
               v-model="selectedArea"
             >
-              <option disabled selected>Выберите направление</option>
+              <option disabled value="Выберите направление">Выберите направление</option>
               <option
                 v-for="area in areaList.areas"
                 :key="area.id"
-                :value="area"
+                :value="area.name_area"
               >
                 {{ area.name_area }}
               </option>
               <option value="newArea">Новое направление</option>
             </select>
             <div class="h-11 my-3">
-              <h2
-                v-if="
-                  selectedArea !== 'Выберете направление' &&
-                  selectedArea !== 'newArea'
-                "
-              >
-                Для направления "{{ selectedArea.name_area }}" характерны:
+              <h2 v-if="selectedArea !== 'Выберите направление' && selectedArea !== 'newArea'">
+                Для направления "{{ selectedArea }}" характерны:
                 <span class="text-lg">{{ transformedFormula }}</span>
               </h2>
             </div>
           </div>
         </div>
       </div>
+      
       <AddArea v-if="selectedArea === 'newArea'" />
     </div>
   </div>
@@ -47,14 +43,14 @@
 <script lang='ts' setup>
 import { computed, reactive, ref, onMounted } from "vue";
 import AddArea from "./AddArea.vue";
-import { getArea, Areas, Area } from "../hooks/useArea";
-import { getSymptom, Symptoms } from "../hooks/useSymptom";
+import { getArea, Areas, Area } from "../services/useArea";
+import { getSymptom, Symptoms } from "../services/useSymptom";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
 let areaList = ref<Areas>({ areas: [] });
 let symptomList = ref<Symptoms>({ symptoms: [] });
-let selectedArea = ref<Area | string>("Выберете направление");
+let selectedArea = ref<Area | string>("Выберите направление");
 const transformedFormula = computed(() => {
   let formula: string;
   if (typeof selectedArea.value !== "string")
